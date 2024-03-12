@@ -61,7 +61,6 @@ exports.autenticarAdmin = async (req, res, next) => {
 
 exports.AllUsers = async (req, res) => {   
 
-
     try {
 
         const usuarios = await  Usuarios.findAll({           
@@ -82,5 +81,36 @@ exports.AllUsers = async (req, res) => {
         console.log(error)
         
     }
+}
 
+exports.eliminarUser = async( req, res) => {
+
+    const { id } = req.params;   
+
+    const usuario = await Usuarios.findByPk(id);    
+
+    if(!usuario){
+        return res.status(400).json({msg: 'No existe el usuario'});        
+    }
+
+    await usuario.destroy();
+    res.status(200).json({msg: 'Registro Eliminado'})
+ 
+}
+
+exports.llamarUser = async(req, res) => {
+
+    const { id } = req.params;
+    
+    const usuario = await Usuarios.findByPk(id);
+    if(!usuario){
+        return res.status(400).json({msg: 'No existe el usuario'});        
+    }
+
+    usuario.llamado = !usuario.llamado;
+    await usuario.save();
+
+    res.json({
+        resultado: true
+    })
 }

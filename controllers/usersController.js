@@ -28,12 +28,12 @@ exports.FormUser = async (req, res, next) => {
 
 exports.crearUser = async (req, res, next) => {
 
-    const {propietario, casado, edad, Personas_hogarId, Agua_provenienteId, agua_hogar,
-            reacciones_alergicas, nombre, celular, direccion, zipcode} = req.body;
+    const {propietario, casado, edad, Personas_hogarId,  Agua_provenienteId, agua_hogar,
+            reacciones_alergicas, nombre, celular, calidad_agua, direccion, zipcode} = req.body;
 
     const usuario = await Usuarios.create({
         propietario: propietario,
-        calidad_agua: 5,
+        calidad_agua: calidad_agua,
         reacciones_alergicas: reacciones_alergicas, 
         nombre: nombre,
         celular: celular,
@@ -44,7 +44,7 @@ exports.crearUser = async (req, res, next) => {
         Agua_provenienteId: Agua_provenienteId,
         CasadoId: casado,
         EdadId: edad,
-        Personas_hogarId: Personas_hogarId,       
+        Personas_hogarId: Personas_hogarId,     
 
     })
 

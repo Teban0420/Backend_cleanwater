@@ -16,6 +16,8 @@ module.exports = function(){
     router.post('/login', adminController.autenticarAdmin);
     router.post('/crear-admin', adminController.crearAdmin);
     router.get('/all', adminController.AllUsers);
+    router.delete('/users/:id', adminController.eliminarUser);
+    router.put('/llamar_user/:id', adminController.llamarUser);
 
     return router;
 }
