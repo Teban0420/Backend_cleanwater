@@ -9,6 +9,7 @@ module.exports = function(){
 
     // rutas publicas
     router.get('/crear-usuario', usersController.FormUser);
+    router.post('/crear-usuario', usersController.crearUser);
     
 
     // admin

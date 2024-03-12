@@ -37,6 +37,9 @@ const Usuarios = db.define('usuario', {
         allowNull: false,
         defaultValue: false
     },
+    agua_hogar: {
+        type: Sequelize.DataTypes.JSON      
+    }
 
 });
 
