@@ -15,6 +15,7 @@ module.exports = function(){
     // admin
     router.post('/login', adminController.autenticarAdmin);
     router.post('/crear-admin', adminController.crearAdmin);
+    router.get('/all', adminController.AllUsers);
 
     return router;
 }

@@ -1,6 +1,11 @@
 
-const Admin = require('../models/Admin.js');
 const jwt = require('jsonwebtoken');
+const Admin = require('../models/Admin.js');
+const Usuarios = require('../models/Usuarios.js');
+const Agua_proveniente = require('../models/Agua_proveniente.js');
+const Casado = require('../models/Casado.js');
+const Edad = require('../models/Edad.js');
+const Personas_hogar = require('../models/Personas_hogar.js');
 
 exports.crearAdmin = async (req, res, next) => {
 
@@ -52,4 +57,30 @@ exports.autenticarAdmin = async (req, res, next) => {
 
     }
     
+}
+
+exports.AllUsers = async (req, res) => {   
+
+
+    try {
+
+        const usuarios = await  Usuarios.findAll({           
+            include: [
+                {model: Agua_proveniente, as: 'agua_proveniente'},
+                {model: Casado, as: 'casado'},
+                {model: Edad, as: 'edad'},
+                {model: Personas_hogar, as: 'personas_hogar'},
+            ]
+        })
+
+        res.json({
+            usuarios            
+        });
+        
+        
+    } catch (error) {
+        console.log(error)
+        
+    }
+
 }

@@ -8,6 +8,6 @@ const Agua_hogar = db.define('agua_hogar', {
         type: Sequelize.DataTypes.STRING(30),
         allowNull: false
     }
-}); 
+});  
 
 module.exports = Agua_hogar;
