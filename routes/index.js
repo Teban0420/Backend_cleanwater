@@ -8,10 +8,10 @@ const adminController = require('../controllers/adminController');
 module.exports = function(){
 
     // rutas publicas
+    router.get('/crear-usuario', usersController.FormUser);
     
 
     // admin
-
     router.post('/login', adminController.autenticarAdmin);
     router.post('/crear-admin', adminController.crearAdmin);
 

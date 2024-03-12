@@ -4,7 +4,9 @@
   "description": "node react mysql",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./index.js"
+    "start": "nodemon ./index.js",
+    "db:importar": "node ./seed/seeder.js -i",
+    "db:eliminar": "node ./seed/seeder.js -e"
   },
   "author": "Esteban Giraldo",
   "license": "ISC",

@@ -46,7 +46,6 @@ exports.autenticarAdmin = async (req, res, next) => {
              {
                 expiresIn: '5h'
              });
-
              // retornar token
              res.json({token});
         }
