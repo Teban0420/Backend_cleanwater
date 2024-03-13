@@ -83,7 +83,7 @@ exports.AllUsers = async (req, res) => {
     }
 }
 
-exports.eliminarUser = async( req, res) => {
+exports.eliminarUser = async( req, res) => { 
 
     const { id } = req.params;   
 
