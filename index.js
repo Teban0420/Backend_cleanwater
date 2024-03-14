@@ -47,5 +47,28 @@ app.use((req, res, next) => {
 // rutas de la app
 app.use('/', routes());
 
+const whiteList = [process.env.FRONTEND_URL];
+
+const CorsOptions = {
+    origin: (origin, callback) => {
+        // revisar si la peticion viene de un servidor que esta en la lista blanca
+        const existe = whiteList.some( dominio => dominio === origin)
+        if(existe){
+            callback(null, true)
+        }
+        else{
+            callback(new Error('No permitido'))
+        }
+    }
+}
+
+// habilitar cors
+app.use(cors( CorsOptions ))
+
+const host = process.env.HOST || '0.0.0.0'
+const port = process.env.PORT || 5000
+
 // puerto
-app.listen(5000);
+app.listen(port, host, ()=>{
+    console.log('el servidor funciona');
+});
