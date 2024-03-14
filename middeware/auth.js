@@ -20,6 +20,7 @@ module.exports = (req, res, next) => {
         revisarToken = jwt.verify(token, 'LLAVESECRETA');
         
     } catch (error) {
+        console.log(error)
         error.statusCode = 500;
         throw error;
     }
@@ -30,7 +31,7 @@ module.exports = (req, res, next) => {
         error.statusCode = 401;
         throw error;
     }
-
+ 
     next(); // se va al siguiente middeware
 
 }
