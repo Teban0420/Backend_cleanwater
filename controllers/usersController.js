@@ -1,60 +1,69 @@
 
-const Agua_hogar = require('../models/Agua_hogar.js');
-const Agua_proveniente = require('../models/Agua_proveniente.js');
-const Casado = require('../models/Casado.js');
-const Edad = require('../models/Edad.js');
-const Personas_hogar = require('../models/Personas_hogar.js');
-const Usuarios = require('../models/index.js');
+const TypeVacation = require('../models/TypeVacation.js');
+const AboutUs = require('../models/AboutUs.js');
+const Reserve = require('../models/index.js');
 
-exports.FormUser = async (req, res, next) => {
+exports.FormUser = async (req, res) => {
 
-    const [agua_hogar, agua_proveniente, casado, edad, personas_hogar] = await Promise.all([
-        Agua_hogar.findAll(),
-        Agua_proveniente.findAll(),
-        Casado.findAll(),
-        Edad.findAll(),
-        Personas_hogar.findAll(),
-    ])
+   try {
+    //    const type_vacation = await TypeVacation.findAll();
+       const [type_vacation, aboutus] = await Promise.all([
+            TypeVacation.findAll(),
+            AboutUs.findAll(),
+       ])
+    
+       return res.json({
+            ok: true,
+            type_vacation,
+            aboutus
+        });
 
+   } catch (error) {
 
-    res.json({ agua_hogar,
-            agua_proveniente,
-            casado,
-            edad,
-            personas_hogar
-    });
- 
+        res.status(500).json({
+            ok: false,
+            msg: 'Algo salio mal'
+        });     
+   }
 }
 
-exports.crearUser = async (req, res, next) => {
+exports.crearReserve = async (req, res, next) => {
 
-    const {propietario, casado, edad, Personas_hogarId,  Agua_provenienteId, agua_hogar,
-            reacciones_alergicas, nombre, celular, calidad_agua, direccion, zipcode} = req.body;
+    const { dispuesto, email, first_name, last_name, area_code, phone_number, type_of_vacation,
+            many_travelers, number_of_rooms, type_accommodations, many_adults, many_children,
+           celebrating_something, destination_choice, defarting_from, departure_date,
+           return_date, date_flexibles, rent_a_car, need_transfers, desired_person_bucket,
+           travel_insurance, arrangements, anything_special,aboutuId
+          } = req.body;
 
-    const usuario = await Usuarios.create({
-        propietario: propietario,
-        calidad_agua: calidad_agua,
-        reacciones_alergicas: reacciones_alergicas, 
-        nombre: nombre,
-        celular: celular,
-        direccion: direccion,
-        zipcode: zipcode,
-        llamado: 0,
-        agua_hogar: agua_hogar,
-        Agua_provenienteId: Agua_provenienteId,
-        CasadoId: casado,
-        EdadId: edad,
-        Personas_hogarId: Personas_hogarId,     
-
-    })
+    const reserve = await Reserve.create({
+          dispuesto,
+          email,
+          first_name,
+          last_name,
+          area_code,
+          phone_number,
+          type_of_vacation,
+          many_travelers,
+          number_of_rooms,
+          type_accommodations,
+          many_adults,
+          many_children,
+          celebrating_something,
+          destination_choice,
+          defarting_from,
+          departure_date,
+          return_date,
+          date_flexibles,
+          rent_a_car,
+          need_transfers,
+          desired_person_bucket,
+          travel_insurance,
+          arrangements,
+          anything_special,
+          aboutuId,    
+    });
 
     res.status(200).json({msg: 'Creado correctamente'})
 
 }
-// exports.llamadaUser = () => {
-
-// }
-
-// exports.eliminarUser = () => {
-
-// }
